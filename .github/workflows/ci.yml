@@ -1,0 +1,6 @@
+name: Java CI Build and Artifact Upload
+
+on:
+  push:
+    branches:
+      - main
