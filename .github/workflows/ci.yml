@@ -4,10 +4,13 @@ on:
   push:
     branches:
       - main
+<<<<<<< HEAD
   pull_request:
     branches:
       - main
 
+=======
+>>>>>>> 716041c (Job und ersten Schritt zum CI/CD-Workflow hinzufügen)
 jobs:
   build-and-upload-artifact:
     runs-on: ubuntu-latest
@@ -15,6 +18,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+<<<<<<< HEAD
 
       - name: Set up JDK 22
         uses: actions/setup-java@v2
@@ -31,3 +35,5 @@ jobs:
         with:
           name: TicTacToeGame-GroupE
           path: target/TicTacToeGame-GroupE-1.0-SNAPSHOT.jar
+=======
+>>>>>>> 716041c (Job und ersten Schritt zum CI/CD-Workflow hinzufügen)
