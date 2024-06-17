@@ -16,5 +16,14 @@ public class TicTacToe {
         }
     }
 
+    public void spielbrettAnzeigen(){
+        for (int zeile = 0; zeile < 3; zeile++) {
+            for (int spalte = 0; spalte < 3; spalte++) {
+                System.out.print(spielbrett[zeile][spalte]+" ");
+            }
+            System.out.println();
+        }
+    }
+
 
 }
