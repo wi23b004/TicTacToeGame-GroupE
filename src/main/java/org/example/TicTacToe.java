@@ -8,6 +8,10 @@ public class TicTacToe {
         spielbrettHerstellen(); // Initialisiert ein 3x3 Spielfeld
     }
 
+    public char[][] getSpielfeld() {
+        return spielbrett;
+    }
+
     // Methode zum Initialisieren des Spielfeldes
     private void spielbrettHerstellen() {
         for (int zeile = 0; zeile < 3; zeile++) {
