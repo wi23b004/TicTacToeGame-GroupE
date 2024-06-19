@@ -8,7 +8,7 @@ public class TicTacToe {
         spielbrettHerstellen(); // Initialisiert ein 3x3 Spielfeld
     }
 
-    public char[][] getSpielfeld() {
+    public char[][] getSpielBrett() {
         return spielbrett;
     }
 
