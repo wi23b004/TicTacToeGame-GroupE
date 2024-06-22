@@ -36,6 +36,22 @@ public class TicTacToeTest {
         boolean ergebnis = spiel.zugMachen(3,7,'x');
         assertFalse(ergebnis);
     }
+
+    @Test
+    public void testZugMachenUngueltigesSymbol() {
+        TicTacToe spiel = new TicTacToe();
+        boolean ergebnis = spiel.zugMachen(1,1,'a');
+        assertFalse(ergebnis);
+    }
+
+    @Test
+    public void testZugMachenFeldBesetzt() {
+        TicTacToe spiel = new TicTacToe();
+        spiel.zugMachen(1,1,'x');
+        boolean ergebnis = spiel.zugMachen(1,1,'o');
+        assertFalse(ergebnis);
+        assertEquals('X', spiel.getSpielBrett()[1][1]);
+    }
 }
 
 
