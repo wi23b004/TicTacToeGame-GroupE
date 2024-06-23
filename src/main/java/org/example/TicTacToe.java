@@ -58,5 +58,8 @@ public class TicTacToe {
             return false; // Zug nicht erfolgreich
         }
     }
-
+    // Methode zur Anzeige des aktuellen Spielstands hinzufügen
+    public void aktuellenSpielstandAnzeigen() {
+        // Methode ist noch nicht implementiert
+    }
 }
