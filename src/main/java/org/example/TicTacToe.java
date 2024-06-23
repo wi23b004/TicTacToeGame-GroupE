@@ -57,7 +57,6 @@ public class TicTacToe {
             // Feld nicht frei
             return false; // Zug nicht erfolgreich
         }
-
     }
 
 }
