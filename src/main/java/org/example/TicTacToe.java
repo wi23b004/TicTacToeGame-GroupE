@@ -62,7 +62,10 @@ public class TicTacToe {
     public void aktuellenStandAnzeigen() {
         System.out.println("Aktueller Spielstand:");
         for (int zeile = 0; zeile < 3; zeile++) {
-            // Innere Schleife für Spalten wird später hinzugefügt
+            for (int spalte = 0; spalte < 4; spalte++) {
+                System.out.print(spielbrett[zeile][spalte] + " ");
+            }
+            System.out.println(); // Zeilenumbruch nach jeder Zeile
         }
         System.out.println();
     }
