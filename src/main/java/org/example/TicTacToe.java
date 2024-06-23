@@ -71,5 +71,13 @@ public class TicTacToe {
         return false;
     }
 
+    public static void main(String[] args) { // NEU
+        TicTacToe spiel = new TicTacToe(); // NEU
+        spiel.spielbrettAnzeigen(); // NEU
+        // Simuliert das Spielende // NEU
+        if (spiel.istSpielZuEnde()) { // NEU
+            spiel.neuesSpielStarten(); // NEU
+        } // NEU
+    } // NEU
 }
 
