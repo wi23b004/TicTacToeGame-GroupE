@@ -55,11 +55,15 @@ public class TicTacToe {
             return true; // Zug erfolgreich
         } else {
             // Feld nicht frei
-            return false; // Zug nicht erfolgreich
+            return false; // Zug nicht erfolgrei
         }
     }
     // Methode zur Anzeige des aktuellen Spielstands hinzufügen
-    public void aktuellenSpielstandAnzeigen() {
-        // Methode ist noch nicht implementiert
+    public void aktuellenStandAnzeigen() {
+        System.out.println("Aktueller Spielstand:");
+        for (int zeile = 0; zeile < 3; zeile++) {
+            // Innere Schleife für Spalten wird später hinzugefügt
+        }
+        System.out.println();
     }
 }
