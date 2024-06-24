@@ -61,7 +61,7 @@ public class TicTacToe {
 
     // Neue Methode zum Starten eines neuen Spiels
     public void neuesSpielstarten() {
-        System.out.println("Neues Spiel wird gestartet...");
+        System.out.println("Neues Spiel wird gestartet....");
         spielbrettHerstellen();
         spielbrettAnzeigen();
     }
