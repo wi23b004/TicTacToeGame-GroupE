@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
-
   pull_request:
-      branches:
-        - main
+    branches:
+      - main
+
 jobs:
   build-and-upload-artifact:
     runs-on: ubuntu-latest
@@ -29,5 +29,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-            name: TicTacToeGame-GroupE
-            path: target/TicTacToeGame-GroupE-1.0-SNAPSHOT.jar
+          name: TicTacToeGame-GroupE
+          path: target/TicTacToeGame-GroupE-1.0-SNAPSHOT.jar

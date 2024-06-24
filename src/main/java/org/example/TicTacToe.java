@@ -5,7 +5,7 @@ public class TicTacToe {
 
     public TicTacToe() {
         spielbrett = new char[3][3]; // Initialisiert ein 3x3 Spielfeld
-        spielbrettHerstellen(); // Initialisiert ein 3x3 Spielfeld
+        spielbrettHerstellen();
     }
 
     public char[][] getSpielBrett() {
@@ -57,7 +57,18 @@ public class TicTacToe {
             // Feld nicht frei
             return false; // Zug nicht erfolgreich
         }
-
     }
 
+    // Neue Methode zum Starten eines neuen Spiels
+    public void neuesSpielstarten() {
+        System.out.println("Neues Spiel wird gestartet....");
+        spielbrettHerstellen();
+        spielbrettAnzeigen();
+    }
+
+    // Methode, um zu prüfen, ob das Spiel zu Ende ist
+    public boolean istSpielzuEnde(){
+        // Diese Methode sollte das Spielende prüfen, aber wir lassen sie hier einfach false zurückgeben
+        return false;
+    }
 }
