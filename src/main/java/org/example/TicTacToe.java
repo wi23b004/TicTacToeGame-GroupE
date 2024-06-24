@@ -55,14 +55,14 @@ public class TicTacToe {
             return true; // Zug erfolgreich
         } else {
             // Feld nicht frei
-            return false; // Zug nicht erfolgrei
+            return false; // Zug nicht erfolgreich
         }
     }
     // Methode zur Anzeige des aktuellen Spielstands hinzufügen
     public void aktuellenStandAnzeigen() {
         System.out.println("Aktueller Spielstand:");
         for (int zeile = 0; zeile < 3; zeile++) {
-            for (int spalte = 0; spalte < 4; spalte++) {
+            for (int spalte = 0; spalte < 3; spalte++) {
                 System.out.print(spielbrett[zeile][spalte] + " ");
             }
             System.out.println(); // Zeilenumbruch nach jeder Zeile
