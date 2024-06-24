@@ -5,7 +5,7 @@ public class TicTacToe {
 
     public TicTacToe() {
         spielbrett = new char[3][3]; // Initialisiert ein 3x3 Spielfeld
-        spielbrettHerstellen();
+        spielbrettHerstellen(); // Initialisiert ein 3x3 Spielfeld
     }
 
     public char[][] getSpielBrett() {
@@ -32,7 +32,7 @@ public class TicTacToe {
         System.out.println(); // Zusätzliche Leerzeile für bessere Lesbarkeit
     }
 
-    public boolean zugMachen(int zeile, int spalte, char symbol){
+    public boolean zugMachen(int zeile, int spalte, char symbol) {
         // Prüfe ob die Position im Spielbrett ist
         if (zeile < 0 || zeile > 2 || spalte < 0 || spalte > 2) {
             System.out.println("Position außerhalb des Spielbretts");
@@ -57,27 +57,27 @@ public class TicTacToe {
             // Feld nicht frei
             return false; // Zug nicht erfolgreich
         }
-
     }
+
     // Neue Methode zum Starten eines neuen Spiels
-    public void neuesSpielstarten() {
-        System.out.printIn("Neues Spiel wird gestartet...");
+    public void neuesSpielStarten() {
+        System.out.println("Neues Spiel wird gestartet..."); // Korrekte Methode println verwendet
         spielbrettHerstellen();
         spielbrettAnzeigen();
     }
+
     // Methode, um zu prüfen, ob das Spiel zu Ende ist
-    public boolean istSpielzuEnde(){
+    public boolean istSpielZuEnde() {
         // Diese Methode sollte das Spielende prüfen, aber wir lassen sie hier einfach false zurückgeben
         return false;
     }
 
-    public static void main(String[] args) { // NEU
-        TicTacToe spiel = new TicTacToe(); // NEU
-        spiel.spielbrettAnzeigen(); // NEU
-        // Simuliert das Spielende // NEU
-        if (spiel.istSpielZuEnde()) { // NEU
-            spiel.neuesSpielStarten(); // NEU
-        } // NEU
-    } // NEU
+    public static void main(String[] args) {
+        TicTacToe spiel = new TicTacToe();
+        spiel.spielbrettAnzeigen();
+        // Simuliert das Spielende
+        if (spiel.istSpielZuEnde()) {
+            spiel.neuesSpielStarten();
+        }
+    }
 }
-
