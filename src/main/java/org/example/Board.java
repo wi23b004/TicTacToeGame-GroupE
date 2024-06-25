@@ -12,10 +12,12 @@ public class Board {
         return cells[x][y] == '-';
     }
 
-    public void place(int x, int y, char marker) {
+    public boolean place(int x, int y, char marker) {
         if (isCellEmpty(x, y)) {
             cells[x][y] = marker;
+            return true;
         }
+        return false;
     }
 
     public boolean isFull() {
@@ -46,20 +48,26 @@ public class Board {
         }
     }
 
+    public boolean hasWinner() {
+        // Diese Methode sollte die Logik zur Überprüfung eines Gewinners enthalten
+        return false;
+    }
+
+    // Neue Methode zur Überprüfung, ob ein Spieler gewonnen hat
     public boolean checkWin(char marker) {
-        // Check rows
+        // Überprüfung der Reihen
         for (int i = 0; i < 3; i++) {
             if (cells[i][0] == marker && cells[i][1] == marker && cells[i][2] == marker) {
                 return true;
             }
         }
-        // Check columns
+        // Überprüfung der Spalten
         for (int i = 0; i < 3; i++) {
             if (cells[0][i] == marker && cells[1][i] == marker && cells[2][i] == marker) {
                 return true;
             }
         }
-        // Check diagonals
+        // Überprüfung der Diagonalen
         if (cells[0][0] == marker && cells[1][1] == marker && cells[2][2] == marker) {
             return true;
         }
