@@ -53,6 +53,3 @@ public class TicTacToeTest {
         assertEquals('X', spiel.getSpielBrett()[1][1]);
     }
 }
-
-
-
