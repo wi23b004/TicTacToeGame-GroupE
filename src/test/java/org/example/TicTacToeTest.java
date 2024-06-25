@@ -75,4 +75,32 @@ public class TicTacToeTest {
         // Vergleich der erwarteten Ausgabe mit der tatsächlichen ausgegebenen Ausgabe
         assertEquals(expectedOutput, outputStreamCaptor.toString());
     }
+    @Test
+    public void testAktuellenStandAnzeigenNachEinigenZuegen() {
+        // Vorbereitung: Redirect stdout, um die Konsolenausgabe abzufangen
+        ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStreamCaptor));
+
+        // Erzeugen einer neuen TicTacToe-Instanz und Spielbrett initialisieren
+        TicTacToe spiel = new TicTacToe();
+        spiel.spielbrettHerstellen();
+
+        // Einige Züge machen
+        spiel.zugMachen(1, 1, 'X'); // Spieler X setzt auf (1,1)
+        spiel.zugMachen(0, 0, 'O'); // Spieler O setzt auf (0,0)
+        spiel.zugMachen(2, 2, 'X'); // Spieler X setzt auf (2,2)
+
+        // Aufruf der Methode, die den aktuellen Stand anzeigt
+        spiel.aktuellenStandAnzeigen();
+
+        // Erwartete Ausgabe nach den Zügen
+        String expectedOutput = "Aktueller Spielstand:" + System.lineSeparator()
+                + "O - - " + System.lineSeparator()
+                + "- X - " + System.lineSeparator()
+                + "- - X " + System.lineSeparator()
+                + System.lineSeparator();
+
+        // Vergleich der erwarteten Ausgabe mit der tatsächlich ausgegebenen Ausgabe
+        assertEquals(expectedOutput, outputStreamCaptor.toString());
+    }
 }
