@@ -39,4 +39,14 @@ public class TicTacToe {
     public boolean hasWinner() {
         return board.checkWin(currentPlayer.getMarker());
     }
+
+    public boolean makeMove(int x, int y) {
+        if (board.place(x, y, currentPlayer.getMarker())) {
+            board.print();
+            return true;
+        } else {
+            System.out.println("Zelle ist bereits besetzt. Wähle eine andere Zelle.");
+            return false;
+        }
+    }
 }
