@@ -49,4 +49,10 @@ public class TicTacToe {
             return false;
         }
     }
+
+    public void displayGameState() {
+        System.out.println("Aktueller Spielstand:");
+        board.print();
+    }
+
 }
