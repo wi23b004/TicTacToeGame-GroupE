@@ -71,14 +71,4 @@ public class TicTacToe {
         // Diese Methode sollte das Spielende prüfen, aber wir lassen sie hier einfach false zurückgeben
         return false;
     }
-    public void aktuellenStandAnzeigen() {
-        System.out.println("Aktueller Spielstand:");
-        for (int zeile = 0; zeile < 3; zeile++) {
-            for (int spalte = 0; spalte < 3; spalte++) {
-                System.out.print(spielbrett[zeile][spalte] + " ");
-            }
-            System.out.println(); // Zeilenumbruch nach jeder Zeile
-        }
-        System.out.println();
-    }
 }
