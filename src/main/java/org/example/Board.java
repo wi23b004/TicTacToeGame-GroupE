@@ -12,12 +12,10 @@ public class Board {
         return cells[x][y] == '-';
     }
 
-    public boolean place(int x, int y, char marker) {
+    public void place(int x, int y, char marker) {
         if (isCellEmpty(x, y)) {
             cells[x][y] = marker;
-            return true;
         }
-        return false;
     }
 
     public boolean isFull() {
@@ -46,6 +44,28 @@ public class Board {
             }
             System.out.println();
         }
-        System.out.println();
+    }
+
+    public boolean checkWin(char marker) {
+        // Check rows
+        for (int i = 0; i < 3; i++) {
+            if (cells[i][0] == marker && cells[i][1] == marker && cells[i][2] == marker) {
+                return true;
+            }
+        }
+        // Check columns
+        for (int i = 0; i < 3; i++) {
+            if (cells[0][i] == marker && cells[1][i] == marker && cells[2][i] == marker) {
+                return true;
+            }
+        }
+        // Check diagonals
+        if (cells[0][0] == marker && cells[1][1] == marker && cells[2][2] == marker) {
+            return true;
+        }
+        if (cells[0][2] == marker && cells[1][1] == marker && cells[2][0] == marker) {
+            return true;
+        }
+        return false;
     }
 }
