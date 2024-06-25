@@ -16,11 +16,11 @@ public class TicTacToe {
     public void start() {
         board.clear();
         board.print();
-        while (!hasWinner() && !board.isFull()) {
+        while (!board.hasWinner() && !board.isFull()) {
             // Handle player moves (omitted for brevity)
             switchCurrentPlayer();
         }
-        if (hasWinner()) {
+        if (board.hasWinner()) {
             System.out.println("Player " + currentPlayer.getMarker() + " wins!");
         } else {
             System.out.println("It's a draw!");
@@ -38,5 +38,15 @@ public class TicTacToe {
 
     public boolean hasWinner() {
         return board.checkWin(currentPlayer.getMarker());
+    }
+
+    public boolean makeMove(int x, int y) {
+        if (board.place(x, y, currentPlayer.getMarker())) {
+            board.print();
+            return true;
+        } else {
+            System.out.println("Zelle ist bereits besetzt. Wähle eine andere Zelle.");
+            return false;
+        }
     }
 }
