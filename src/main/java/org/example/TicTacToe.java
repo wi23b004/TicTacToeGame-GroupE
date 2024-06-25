@@ -5,7 +5,7 @@ public class TicTacToe {
 
     public TicTacToe() {
         spielbrett = new char[3][3]; // Initialisiert ein 3x3 Spielfeld
-        spielbrettHerstellen(); // Initialisiert ein 3x3 Spielfeld
+        spielbrettHerstellen();
     }
 
     public char[][] getSpielBrett() {
@@ -58,6 +58,7 @@ public class TicTacToe {
             return false; // Zug nicht erfolgreich
         }
     }
+
     // Methode zur Anzeige des aktuellen Spielstands hinzufügen
     public void aktuellenStandAnzeigen() {
         System.out.println("Aktueller Spielstand:");
@@ -68,7 +69,6 @@ public class TicTacToe {
             System.out.println(); // Zeilenumbruch nach jeder Zeile
         }
         System.out.println();
-
     }
 
     // Neue Methode zum Starten eines neuen Spiels
