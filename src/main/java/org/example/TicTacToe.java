@@ -68,5 +68,19 @@ public class TicTacToe {
             System.out.println(); // Zeilenumbruch nach jeder Zeile
         }
         System.out.println();
+
+    }
+
+    // Neue Methode zum Starten eines neuen Spiels
+    public void neuesSpielStarten() {
+        System.out.println("Neues Spiel wird gestartet....");
+        spielbrettHerstellen();
+        spielbrettAnzeigen();
+    }
+
+    // Methode, um zu prüfen, ob das Spiel zu Ende ist
+    public boolean istSpielZuEnde(){
+        // Diese Methode sollte das Spielende prüfen, aber wir lassen sie hier einfach false zurückgeben
+        return false;
     }
 }
