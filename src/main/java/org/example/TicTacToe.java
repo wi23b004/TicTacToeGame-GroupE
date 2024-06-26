@@ -52,11 +52,6 @@ public class TicTacToe {
         System.out.println("Starting a new game...");
         start();
     }
-
-    public boolean hasWinner() {
-        return board.checkWin(currentPlayer.getMarker());
-    }
-
     public boolean makeMove(int x, int y) {
         if (board.place(x, y, currentPlayer.getMarker())) {
             board.print();
