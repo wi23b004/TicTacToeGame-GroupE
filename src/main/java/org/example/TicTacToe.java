@@ -1,74 +1,101 @@
 package org.example;
 
+import java.util.Scanner;
+
 public class TicTacToe {
-    private char[][] spielbrett; // Das Spielfeld für das TicTacToe-Spiel
-
+    private Player player1;
+    private Player player2;
+    private Player currentPlayer;
+    private Board board;
+    public static void main(String[] args) {
+        TicTacToe game = new TicTacToe();
+        game.start();
+    }
     public TicTacToe() {
-        spielbrett = new char[3][3]; // Initialisiert ein 3x3 Spielfeld
-        spielbrettHerstellen();
+        player1 = new Player('X');
+        player2 = new Player('O');
+        currentPlayer = player1;
+        board = new Board();
     }
 
-    public char[][] getSpielBrett() {
-        return spielbrett;
-    }
+    public void start() {
+        board.clear();
+        board.print();
+        Scanner scanner = new Scanner(System.in);
+        while (!board.hasWinner() && !board.isFull()) {
+            System.out.println("Spieler " + currentPlayer.getMarker() + " ist am Zug.");
 
-    // Methode zum Initialisieren des Spielfeldes
-    private void spielbrettHerstellen() {
-        for (int zeile = 0; zeile < 3; zeile++) {
-            for (int spalte = 0; spalte < 3; spalte++) {
-                spielbrett[zeile][spalte] = '-';
+            int row = -1;
+            int col = -1;
+
+            // Eingabe für die Zeile validieren
+            while (row < 0 || row > 2) {
+                System.out.print("Geben Sie die Zeile (0-2) ein: ");
+                if (scanner.hasNextInt()) {
+                    row = scanner.nextInt();
+                    if (row < 0 || row > 2) {
+                        System.out.println("Ungültige Zeile. Bitte geben Sie eine Zahl zwischen 0 und 2 ein.");
+                    }
+                } else {
+                    System.out.println("Ungültige Eingabe. Bitte geben Sie eine Zahl zwischen 0 und 2 ein.");
+                    scanner.next(); // Ungültige Eingabe verwerfen
+                }
+            }
+
+            // Eingabe für die Spalte validieren
+            while (col < 0 || col > 2) {
+                System.out.print("Geben Sie die Spalte (0-2) ein: ");
+                if (scanner.hasNextInt()) {
+                    col = scanner.nextInt();
+                    if (col < 0 || col > 2) {
+                        System.out.println("Ungültige Spalte. Bitte geben Sie eine Zahl zwischen 0 und 2 ein.");
+                    }
+                } else {
+                    System.out.println("Ungültige Eingabe. Bitte geben Sie eine Zahl zwischen 0 und 2 ein.");
+                    scanner.next(); // Ungültige Eingabe verwerfen
+                }
+            }
+
+            if (makeMove(row, col)) {
+                if (board.hasWinner()) {
+                    System.out.println("Spieler " + currentPlayer.getMarker() + " hat gewonnen!");
+                } else if (board.isFull()) {
+                    System.out.println("Das Spiel endet unentschieden!");
+                }
+                switchCurrentPlayer();
+            } else {
+                System.out.println("Ungültiger Zug. Versuchen Sie es erneut.");
             }
         }
+
+        System.out.print("Wollen Sie erneut spielen (ja/nein): ");
+        String neuesSpiel = scanner.next();
+        if (neuesSpiel.equalsIgnoreCase("ja")) {
+            startNewGame();
+        }
+        scanner.close();
     }
 
-    // Setzt jedes Feld auf '-'
-    public void spielbrettAnzeigen() {
-        for (int zeile = 0; zeile < 3; zeile++) {
-            for (int spalte = 0; spalte < 3; spalte++) {
-                System.out.print(spielbrett[zeile][spalte] + " "); // Druckt jedes Feld mit einem Leerzeichen dazwischen
-            }
-            System.out.println(); // Neue Zeile nach jeder Reihe
-        }
-        System.out.println(); // Zusätzliche Leerzeile für bessere Lesbarkeit
+    private void switchCurrentPlayer() {
+        currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 
-    public boolean zugMachen(int zeile, int spalte, char symbol){
-        // Prüfe ob die Position im Spielbrett ist
-        if (zeile < 0 || zeile > 2 || spalte < 0 || spalte > 2) {
-            System.out.println("Position außerhalb des Spielbretts");
-            return false; // Position nicht im Spielbrett
-        }
-
-        // Symbol in Groß umwandeln
-        symbol = Character.toUpperCase(symbol);
-
-        // Prüfen ob das Symbol gültig ist
-        if (symbol != 'X' && symbol != 'O') {
-            System.out.println("Ungültiges Symbol eingegeben! Nur X oder O sind erlaubt.");
-            return false; // Ungültiges Symbol
-        }
-
-        // Prüfen ob das Feld frei ist
-        if (spielbrett[zeile][spalte] == '-') {
-            // Wenn Feld frei --> Symbol setzen
-            spielbrett[zeile][spalte] = symbol;
-            return true; // Zug erfolgreich
+    public void startNewGame() {
+        System.out.println("Starting a new game...");
+        start();
+    }
+    public boolean makeMove(int x, int y) {
+        if (board.place(x, y, currentPlayer.getMarker())) {
+            board.print();
+            return true;
         } else {
-            // Feld nicht frei
-            return false; // Zug nicht erfolgreich
+            System.out.println("Zelle ist bereits besetzt. Wähle eine andere Zelle.");
+            return false;
         }
     }
 
-    // Neue Methode zum Starten eines neuen Spiels
-    public void neuesSpielstarten() {
-        System.out.println("Neues Spiel wird gestartet....");
-        spielbrettHerstellen();
-        spielbrettAnzeigen();
-    }
-
-    // Methode, um zu prüfen, ob das Spiel zu Ende ist
-    public boolean istSpielzuEnde(){
-        // Diese Methode sollte das Spielende prüfen, aber wir lassen sie hier einfach false zurückgeben
-        return false;
+    public void displayGameState() {
+        System.out.println("Aktueller Spielstand:");
+        board.print();
     }
 }
