@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class TicTacToe {
     private Player player1;
     private Player player2;
-    private Player currentPlayer;
+    public Player currentPlayer;
     private Board board;
     public static void main(String[] args) {
         TicTacToe game = new TicTacToe();
@@ -76,7 +76,7 @@ public class TicTacToe {
         scanner.close();
     }
 
-    private void switchCurrentPlayer() {
+    public void switchCurrentPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 
