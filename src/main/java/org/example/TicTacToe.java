@@ -81,7 +81,7 @@ public class TicTacToe {
     }
 
     public void startNewGame() {
-        System.out.println("Starting a new game...");
+        System.out.println("Starte ein neues Spiel...");
         start();
     }
     public boolean makeMove(int x, int y) {
@@ -94,8 +94,4 @@ public class TicTacToe {
         }
     }
 
-    public void displayGameState() {
-        System.out.println("Aktueller Spielstand:");
-        board.print();
-    }
 }
