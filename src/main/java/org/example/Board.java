@@ -21,36 +21,10 @@ public class Board {
         return false;
     }
 
-    public boolean isFull() {
-        for (char[] row : cells) {
-            for (char cell : row) {
-                if (cell == '-') {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
+    //Überprüfung des Gewinners
 
-    public void clear () {
-        for (int x = 0; x < 3; x++) {
-            for(int y = 0; y < 3; y++) {
-                cells[x][y] = '-';
-            }
-        }
-    }
-
-    public void print() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                System.out.print(cells[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    public boolean hasWinner() {
+    public boolean checkWinner() {
         // Überprüfung der Reihen im Spiel
         for (int i = 0; i < 3; i++) {
             if (cells[i][0] == cells[i][1] && cells[i][1] == cells[i][2] && cells[i][0] != '-') {
@@ -72,5 +46,34 @@ public class Board {
         }
         return false;
     }
+
+    public void clear () {
+        for (int x = 0; x < 3; x++) {
+            for(int y = 0; y < 3; y++) {
+                cells[x][y] = '-';
+            }
+        }
+    }
+
+    public boolean isFull() {
+        for (char[] row : cells) {
+            for (char cell : row) {
+                if (cell == '-') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void print() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(cells[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
 
 }
