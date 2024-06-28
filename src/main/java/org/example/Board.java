@@ -13,13 +13,7 @@ public class Board {
         return cells[x][y] == '-';
     }
 
-    public boolean place(int x, int y, char marker) {
-        if (isCellEmpty(x, y)) {
-            cells[x][y] = marker;
-            return true;
-        }
-        return false;
-    }
+
 
 
     //Überprüfung des Gewinners
@@ -73,6 +67,14 @@ public class Board {
             }
             System.out.println();
         }
+    }
+
+    public boolean place(int x, int y, char marker) {
+        if (isCellEmpty(x, y)) {
+            cells[x][y] = marker;
+            return true;
+        }
+        return false;
     }
 
 
