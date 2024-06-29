@@ -1,124 +1,111 @@
 package org.example;
 
-import org.example.Player;
-import org.example.TicTacToe;
-import org.junit.jupiter.api.*;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.NoSuchElementException;
-
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class TicTacToeTest {
+public class BoardTest {
+    Board board;
 
-    // Mocking user input for testing
-    private void provideInput(String data) {
-        InputStream stdin = System.in;
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
+    @BeforeEach
+    public void setUp() {
+        board = new Board();
     }
 
     @Test
-    @DisplayName("Test start method with valid moves")
-    void testStartValidMoves() {
-        TicTacToe game = new TicTacToe();
-
-        // Mock input for player moves (valid sequence)
-        provideInput("0\n0\n1\n1\n0\n1\n2\n2\n");
-
-        // Redirect System.out to capture output
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
-        game.start();
-
-        String consoleOutput = outputStream.toString();
-        assertTrue(consoleOutput.contains("Das Spiel endet unentschieden!"));
+    public void testBoardInitialization() {
+        board.print(); // just for visual confirmation
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                assertTrue(board.isCellEmpty(i, j));
+            }
+        }
     }
 
     @Test
-    @DisplayName("Test start method with invalid moves")
-    void testStartInvalidMoves() {
-        TicTacToe game = new TicTacToe();
-
-        // Mock input for player moves (some invalid moves included)
-        provideInput("0\n0\n0\n0\n1\n1\n1\n1\n");
-
-        // Redirect System.out to capture output
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
-        game.start();
-
-        String consoleOutput = outputStream.toString();
-        assertTrue(consoleOutput.contains("Ungültiger Zug. Versuchen Sie es erneut."));
-        assertTrue(consoleOutput.contains("Das Spiel endet unentschieden!"));
+    public void testPlaceMarker() {
+        assertTrue(board.place(0, 0, 'X'));
+        assertFalse(board.isCellEmpty(0, 0));
+        assertFalse(board.place(0, 0, 'O'));
     }
 
     @Test
-    @DisplayName("Test startNewGame method")
-    void testStartNewGame() {
-        TicTacToe game = new TicTacToe();
-
-        // Mock input for player moves
-        provideInput("0\n0\n1\n1\n2\n2\n");
-
-        // Redirect System.out to capture output
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
-        // Run two games
-        game.start();
-        game.startNewGame();
-
-        String consoleOutput = outputStream.toString();
-        assertTrue(consoleOutput.contains("Starting a new game..."));
+    public void testBoardIsFull() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board.place(i, j, 'X');
+            }
+        }
+        assertTrue(board.isFull());
     }
 
     @Test
-    @DisplayName("Test makeMove method with valid move")
-    void testMakeMoveValid() {
-        TicTacToe game = new TicTacToe();
-
-        assertTrue(game.makeMove(0, 0));
+    public void testClearBoard() {
+        board.place(0, 0, 'X');
+        board.clear();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                assertTrue(board.isCellEmpty(i, j));
+            }
+        }
     }
 
     @Test
-    @DisplayName("Test makeMove method with invalid move")
-    void testMakeMoveInvalid() {
-        TicTacToe game = new TicTacToe();
-
-        game.makeMove(0, 0); // make a valid move first
-
-        assertFalse(game.makeMove(0, 0));
+    public void testHasWinner() {
+        board.place(0, 0, 'X');
+        board.place(0, 1, 'X');
+        board.place(0, 2, 'X');
+        assertTrue(board.hasWinner());
     }
 
     @Test
-    @DisplayName("Test switchCurrentPlayer method")
-    void testSwitchCurrentPlayer() {
-        TicTacToe game = new TicTacToe();
-        Player initialPlayer = game.currentPlayer;
-
-        game.switchCurrentPlayer();
-        Player newPlayer = game.currentPlayer;
-
-        assertNotEquals(initialPlayer, newPlayer);
+    public void testHasWinnerColumn() {
+        board.place(0, 0, 'X');
+        board.place(1, 0, 'X');
+        board.place(2, 0, 'X');
+        assertTrue(board.hasWinner());
     }
 
     @Test
-    @DisplayName("Test displayGameState method")
-    void testDisplayGameState() {
-        TicTacToe game = new TicTacToe();
+    public void testHasWinnerDiagonal() {
+        board.place(0, 0, 'X');
+        board.place(1, 1, 'X');
+        board.place(2, 2, 'X');
+        assertTrue(board.hasWinner());
+    }
 
-        // Redirect System.out to capture output
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
+    @Test
+    public void testCheckWin() {
+        board.place(0, 0, 'X');
+        board.place(0, 1, 'X');
+        board.place(0, 2, 'X');
+        assertTrue(board.checkWin('X'));
+        assertFalse(board.checkWin('O'));
+    }
 
-        game.displayGameState();
+    @Test
+    public void testCheckWinColumn() {
+        board.place(0, 0, 'X');
+        board.place(1, 0, 'X');
+        board.place(2, 0, 'X');
+        assertTrue(board.checkWin('X'));
+        assertFalse(board.checkWin('O'));
+    }
 
-        String consoleOutput = outputStream.toString();
-        assertTrue(consoleOutput.contains("Aktueller Spielstand:"));
+    @Test
+    public void testCheckWinDiagonal() {
+        board.place(0, 0, 'X');
+        board.place(1, 1, 'X');
+        board.place(2, 2, 'X');
+        assertTrue(board.checkWin('X'));
+        assertFalse(board.checkWin('O'));
+    }
+
+    @Test
+    public void testNoWinner() {
+        board.place(0, 0, 'X');
+        board.place(0, 1, 'X');
+        board.place(1, 0, 'O');
+        assertFalse(board.hasWinner());
     }
 }
