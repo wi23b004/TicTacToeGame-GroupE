@@ -47,11 +47,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.0.0-M5</version> <!-- Upgrade to the latest version -->
                 <configuration>
-                    <forkCount>1</forkCount>
-                    <reuseForks>true</reuseForks>
-                    <argLine>-Xmx1024m -XX:MaxPermSize=128m</argLine>
+                    <forkCount>0</forkCount> <!-- Set forkCount to 0 to run tests in the same JVM -->
+                    <reuseForks>false</reuseForks> <!-- Disable reusing forks -->
+                    <argLine>-Xmx2048m</argLine> <!-- Adjust memory as needed -->
                 </configuration>
             </plugin>
 
