@@ -19,62 +19,66 @@ public class TicTacToe {
     }
 
     public void startGame() {
-        board.clear();
-        board.print();
         Scanner scanner = new Scanner(System.in);
-        while (!board.checkWinner() && !board.isFull()) {
-            System.out.println("Spieler " + currentPlayer.getMarker() + " ist am Zug.");
+        try {
+            board.clear();
+            board.print();
 
-            int row = -1;
-            int col = -1;
+            while (!board.checkWinner() && !board.isFull()) {
+                System.out.println("Spieler " + currentPlayer.getMarker() + " ist am Zug.");
 
-            // Eingabe für die Zeile validieren
-            while (row < 0 || row > 2) {
-                System.out.print("Geben Sie die Zeile (0-2) ein: ");
-                if (scanner.hasNextInt()) {
-                    row = scanner.nextInt();
-                    if (row < 0 || row > 2) {
-                        System.out.println("Ungültige Zeile. Bitte geben Sie eine Zahl zwischen 0 und 2 ein.");
+                int row = -1;
+                int col = -1;
+
+                // Eingabe für die Zeile validieren
+                while (row < 0 || row > 2) {
+                    System.out.print("Geben Sie die Zeile (0-2) ein: ");
+                    if (scanner.hasNextInt()) {
+                        row = scanner.nextInt();
+                        if (row < 0 || row > 2) {
+                            System.out.println("Ungültige Zeile. Bitte geben Sie eine Zahl zwischen 0 und 2 ein.");
+                        }
+                    } else {
+                        System.out.println("Ungültige Eingabe. Bitte geben Sie eine Zahl zwischen 0 und 2 ein.");
+                        scanner.next(); // Ungültige Eingabe verwerfen
                     }
-                } else {
-                    System.out.println("Ungültige Eingabe. Bitte geben Sie eine Zahl zwischen 0 und 2 ein.");
-                    scanner.next(); // Ungültige Eingabe verwerfen
                 }
-            }
 
-            // Eingabe für die Spalte validieren
-            while (col < 0 || col > 2) {
-                System.out.print("Geben Sie die Spalte (0-2) ein: ");
-                if (scanner.hasNextInt()) {
-                    col = scanner.nextInt();
-                    if (col < 0 || col > 2) {
-                        System.out.println("Ungültige Spalte. Bitte geben Sie eine Zahl zwischen 0 und 2 ein.");
+                // Eingabe für die Spalte validieren
+                while (col < 0 || col > 2) {
+                    System.out.print("Geben Sie die Spalte (0-2) ein: ");
+                    if (scanner.hasNextInt()) {
+                        col = scanner.nextInt();
+                        if (col < 0 || col > 2) {
+                            System.out.println("Ungültige Spalte. Bitte geben Sie eine Zahl zwischen 0 und 2 ein.");
+                        }
+                    } else {
+                        System.out.println("Ungültige Eingabe. Bitte geben Sie eine Zahl zwischen 0 und 2 ein.");
+                        scanner.next(); // Ungültige Eingabe verwerfen
                     }
+                }
+
+                if (makeMove(row, col)) {
+                    if (board.checkWinner()) {
+                        System.out.println("Spieler " + currentPlayer.getMarker() + " hat gewonnen!");
+                    } else if (board.isFull()) {
+                        System.out.println("Das Spiel endet unentschieden!");
+                    }
+                    switchCurrentPlayer();
                 } else {
-                    System.out.println("Ungültige Eingabe. Bitte geben Sie eine Zahl zwischen 0 und 2 ein.");
-                    scanner.next(); // Ungültige Eingabe verwerfen
+                    System.out.println("Ungültiger Zug. Versuchen Sie es erneut.");
                 }
             }
-
-            if (makeMove(row, col)) {
-                if (board.checkWinner()) {
-                    System.out.println("Spieler " + currentPlayer.getMarker() + " hat gewonnen!");
-                } else if (board.isFull()) {
-                    System.out.println("Das Spiel endet unentschieden!");
-                }
-                switchCurrentPlayer();
-            } else {
-                System.out.println("Ungültiger Zug. Versuchen Sie es erneut.");
+        } finally {
+            System.out.print("Wollen Sie erneut spielen (ja/nein): ");
+            String neuesSpiel = scanner.next();
+            if (neuesSpiel.equalsIgnoreCase("ja")) {
+                startNewGame();
             }
+            scanner.close(); // Am Ende des gesamten Programmlaufs schließen
         }
-
-        System.out.print("Wollen Sie erneut spielen (ja/nein): ");
-        String neuesSpiel = scanner.next();
-        if (neuesSpiel.equalsIgnoreCase("ja")) {
-            startNewGame();
-        }
-        scanner.close();
     }
+
 
     public void switchCurrentPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
