@@ -1,25 +1,19 @@
 package org.example;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
 
     @Test
-    public void testPlayerInitialization() {
+    public void testGetMarker_Positive() {
         Player player = new Player('X');
         assertEquals('X', player.getMarker());
     }
 
     @Test
-    public void testPlayerInitializationWithDifferentMarker() {
-        Player player = new Player('O');
-        assertEquals('O', player.getMarker());
-    }
-
-    @Test
-    public void testPlayerMarkerIsNotEmpty() {
+    public void testGetMarker_Negative() {
         Player player = new Player('X');
-        assertNotEquals('\0', player.getMarker());
+        assertNotEquals('O', player.getMarker());
     }
 }

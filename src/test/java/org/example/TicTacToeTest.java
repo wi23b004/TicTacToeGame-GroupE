@@ -1,14 +1,12 @@
 package org.example;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TicTacToeTest {
-
     private TicTacToe game;
 
     @BeforeEach
@@ -20,43 +18,40 @@ public class TicTacToeTest {
     public void testSwitchCurrentPlayer() {
         Player initialPlayer = game.currentPlayer;
         game.switchCurrentPlayer();
-        assertNotEquals(initialPlayer, game.currentPlayer, "Der aktuelle Spieler sollte gewechselt werden.");
-        game.switchCurrentPlayer(); // Switch back to initial player for next test consistency
-        assertEquals(initialPlayer, game.currentPlayer, "Der aktuelle Spieler sollte nach dem Wechsel wiederhergestellt werden.");
+        assertNotEquals(initialPlayer, game.currentPlayer);
+        game.switchCurrentPlayer();
+        assertEquals(initialPlayer, game.currentPlayer);
     }
 
     @Test
-    public void testMakeMoveValid() {
-        assertTrue(game.makeMove(0, 0), "Ein gültiger Zug sollte akzeptiert werden.");
+    public void testMakeMove_Positive() {
+        assertTrue(game.makeMove(0, 0));
     }
 
     @Test
-    public void testMakeMoveInvalid() {
-        game.makeMove(0, 0); // Place 'X' at (0, 0)
-        assertFalse(game.makeMove(0, 0), "Ein ungültiger Zug sollte abgelehnt werden (Zelle bereits besetzt).");
+    public void testMakeMove_Negative() {
+        game.makeMove(0, 0);
+        assertFalse(game.makeMove(0, 0));
     }
 
     @Test
-    public void testGameFlowWithValidInput() {
-        String input = "0\n0\n0\n1\n1\n1\n0\n2\n2\n2\n";
-        provideInput(input);
-        assertDoesNotThrow(() -> game.start(), "Das Spiel sollte ohne Fehler mit gültigen Eingaben laufen.");
+    public void testStartGame_WithWinner() {
+        String input = "0\n0\n1\n0\n2\n0\n";
+        simulateInput(input);
+        game.startGame();
+        assertTrue(game.board.checkWinner());
     }
 
     @Test
-    public void testGameFlowWithInvalidInput() {
-        String input = "0\n0\n5\n0\na\n0\n1\n1\n1\n0\n2\n2\n2\n";
-        provideInput(input);
-        assertDoesNotThrow(() -> game.start(), "Das Spiel sollte ungültige Eingaben verarbeiten können.");
+    public void testStartGame_WithDraw() {
+        String input = "0\n0\n0\n1\n0\n2\n1\n1\n1\n0\n2\n2\n2\n1\n2\n0\n";
+        simulateInput(input);
+        game.startGame();
+        assertTrue(game.board.isFull());
     }
 
-    private void provideInput(String data) {
-        InputStream stdin = System.in;
-        try {
-            System.setIn(new ByteArrayInputStream(data.getBytes()));
-            game = new TicTacToe();
-        } finally {
-            System.setIn(stdin);
-        }
+    private void simulateInput(String input) {
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
     }
 }

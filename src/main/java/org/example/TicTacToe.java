@@ -6,7 +6,7 @@ public class TicTacToe {
     private Player player1;
     private Player player2;
     public Player currentPlayer;
-    private Board board;
+    public Board board;
     public static void main(String[] args) {
         TicTacToe game = new TicTacToe();
         game.startGame();
