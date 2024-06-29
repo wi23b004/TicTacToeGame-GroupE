@@ -1,4 +1,5 @@
 package org.example;
+import java.util.Arrays;
 
 public class Board {
     private char[][] cells;
@@ -12,50 +13,19 @@ public class Board {
         return cells[x][y] == '-';
     }
 
-    public boolean place(int x, int y, char marker) {
-        if (isCellEmpty(x, y)) {
-            cells[x][y] = marker;
-            return true;
-        }
-        return false;
-    }
 
-    public boolean isFull() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (cells[i][j] == '-') {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
-    public void clear() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                cells[i][j] = '-';
-            }
-        }
-    }
 
-    public void print() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                System.out.print(cells[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
+    //Überprüfung des Gewinners
 
-    public boolean hasWinner() {
-        // Überprüfung der Reihen
+    public boolean checkWinner() {
+        // Überprüfung der Reihen im Spiel
         for (int i = 0; i < 3; i++) {
             if (cells[i][0] == cells[i][1] && cells[i][1] == cells[i][2] && cells[i][0] != '-') {
                 return true;
             }
         }
-        // Überprüfung der Spalten
+        // Überprüfung der Spalten im Spiel
         for (int i = 0; i < 3; i++) {
             if (cells[0][i] == cells[1][i] && cells[1][i] == cells[2][i] && cells[0][i] != '-') {
                 return true;
@@ -71,27 +41,41 @@ public class Board {
         return false;
     }
 
-    // Neue Methode zur Überprüfung, ob ein Spieler gewonnen hat
-    public boolean checkWin(char marker) {
-        // Überprüfung der Reihen
-        for (int i = 0; i < 3; i++) {
-            if (cells[i][0] == marker && cells[i][1] == marker && cells[i][2] == marker) {
-                return true;
+    public void clear () {
+        for (int x = 0; x < 3; x++) {
+            for(int y = 0; y < 3; y++) {
+                cells[x][y] = '-';
             }
         }
-        // Überprüfung der Spalten
-        for (int i = 0; i < 3; i++) {
-            if (cells[0][i] == marker && cells[1][i] == marker && cells[2][i] == marker) {
-                return true;
+    }
+
+    public boolean isFull() {
+        for (char[] row : cells) {
+            for (char cell : row) {
+                if (cell == '-') {
+                    return false;
+                }
             }
         }
-        // Überprüfung der Diagonalen
-        if (cells[0][0] == marker && cells[1][1] == marker && cells[2][2] == marker) {
-            return true;
+        return true;
+    }
+
+    public void print() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(cells[i][j] + " ");
+            }
+            System.out.println();
         }
-        if (cells[0][2] == marker && cells[1][1] == marker && cells[2][0] == marker) {
+    }
+
+    public boolean place(int x, int y, char marker) {
+        if (isCellEmpty(x, y)) {
+            cells[x][y] = marker;
             return true;
         }
         return false;
     }
+
+
 }

@@ -9,7 +9,7 @@ public class TicTacToe {
     private Board board;
     public static void main(String[] args) {
         TicTacToe game = new TicTacToe();
-        game.start();
+        game.startGame();
     }
     public TicTacToe() {
         player1 = new Player('X');
@@ -18,11 +18,11 @@ public class TicTacToe {
         board = new Board();
     }
 
-    public void start() {
+    public void startGame() {
         board.clear();
         board.print();
         Scanner scanner = new Scanner(System.in);
-        while (!board.hasWinner() && !board.isFull()) {
+        while (!board.checkWinner() && !board.isFull()) {
             System.out.println("Spieler " + currentPlayer.getMarker() + " ist am Zug.");
 
             int row = -1;
@@ -57,7 +57,7 @@ public class TicTacToe {
             }
 
             if (makeMove(row, col)) {
-                if (board.hasWinner()) {
+                if (board.checkWinner()) {
                     System.out.println("Spieler " + currentPlayer.getMarker() + " hat gewonnen!");
                 } else if (board.isFull()) {
                     System.out.println("Das Spiel endet unentschieden!");
@@ -81,8 +81,8 @@ public class TicTacToe {
     }
 
     public void startNewGame() {
-        System.out.println("Starting a new game...");
-        start();
+        System.out.println("Starte ein neues Spiel...");
+        startGame();
     }
     public boolean makeMove(int x, int y) {
         if (board.place(x, y, currentPlayer.getMarker())) {
@@ -94,8 +94,4 @@ public class TicTacToe {
         }
     }
 
-    public void displayGameState() {
-        System.out.println("Aktueller Spielstand:");
-        board.print();
-    }
 }
